@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: username/app:latest
+          image: 979050235289.dkr.ecr.ca-central-1.amazonaws.com/user16-app:latest
           ports:
             - containerPort: 8080
           readinessProbe:

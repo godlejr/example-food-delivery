@@ -1,7 +1,7 @@
 package fooddelivery;
 
 
-public class 주문취소됨 extends AbstractEvent {
+public class 주문canceled extends AbstractEvent {
 
     private Long id;
 

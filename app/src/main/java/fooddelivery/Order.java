@@ -4,17 +4,17 @@ import javax.persistence.*;
 import org.springframework.beans.BeanUtils;
 
 @Entity
-@Table(name="주문_table")
+@Table(name="Order_table")
 public class Order {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String item;
-    private Integer 수량;
-    private String 상태;
-    private String 가게;
-    private Long 가격;
+    private Integer qty;
+    private String status;
+    private String macstore;
+    private Long price;
 
     @PostPersist
     public void onPostPersist(){
@@ -22,15 +22,15 @@ public class Order {
         //Following code causes dependency to external APIs
         // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
 
-        fooddelivery.external.결제이력 결제이력 = new fooddelivery.external.결제이력();
+        MacDelivery.external.OrderList OrderList = new fooddelivery.external.OrderList();
 
         // this is Context Mapping (Anti-corruption Layer)
-        결제이력.setOrderId(String.valueOf(getId()));
-        if(get가격()!=null)
-            결제이력.set금액(Double.valueOf(get가격()));
+        OrderList.setOrderId(String.valueOf(getId()));
+        if(getprice()!=null)
+            OrderList.setprice(Double.valueOf(getprice()));
 
-        Application.applicationContext.getBean(fooddelivery.external.결제이력Service.class)
-                .결제(결제이력);
+        Application.applicationContext.getBean(fooddelivery.external.OrderListService.class)
+                .pay(OrderList);
 
 
     }
@@ -51,35 +51,35 @@ public class Order {
     public void setItem(String item) {
         this.item = item;
     }
-    public Integer get수량() {
-        return 수량;
+    public Integer getqty() {
+        return qty;
     }
 
-    public void set수량(Integer 수량) {
-        this.수량 = 수량;
+    public void setqty(Integer qty) {
+        this.qty = qty;
     }
 
-    public String get상태() {
-        return 상태;
+    public String getstatus() {
+        return status;
     }
 
-    public void set상태(String 상태) {
-        this.상태 = 상태;
+    public void setstatus(String status) {
+        this.status = status;
     }
 
-    public String get가게() {
-        return 가게;
+    public String getmacstore() {
+        return macstore;
     }
 
-    public void set가게(String 가게) {
-        this.가게 = 가게;
+    public void setmacstore(String macstore) {
+        this.macstore = macstore;
     }
 
-    public Long get가격() {
-        return 가격;
+    public Long getprice() {
+        return price;
     }
 
-    public void set가격(Long 가격) {
-        this.가격 = 가격;
+    public void setprice(Long price) {
+        this.price = price;
     }
 }

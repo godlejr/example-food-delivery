@@ -4,7 +4,7 @@ public class 주문됨 extends AbstractEvent {
 
     private Long id;
     private String 품목;
-    private Integer 수량;
+    private Integer qty;
 
     public 주문됨(){
         super();
@@ -24,11 +24,11 @@ public class 주문됨 extends AbstractEvent {
     public void set품목(String 품목) {
         this.품목 = 품목;
     }
-    public Integer get수량() {
-        return 수량;
+    public Integer getqty() {
+        return qty;
     }
 
-    public void set수량(Integer 수량) {
-        this.수량 = 수량;
+    public void setqty(Integer qty) {
+        this.qty = qty;
     }
 }

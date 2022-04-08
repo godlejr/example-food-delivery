@@ -15,7 +15,7 @@ public class PolicyHandler{
     주문Repository 주문Repository;
 
     @StreamListener(KafkaProcessor.INPUT)
-    public void whenever배달시작됨_주문상태변경(@Payload 배달시작됨 배달시작됨){
+    public void whenever배달시작됨_주문status변경(@Payload 배달시작됨 배달시작됨){
 
         if(배달시작됨.isMe() && 배달시작됨.getOrderId()!=null){
 
@@ -30,7 +30,7 @@ public class PolicyHandler{
 
             // Correlation id 는 'orderId' 임
             주문Repository.findById(Long.valueOf(배달시작됨.getOrderId())).ifPresent((주문)->{
-               주문.set상태("배달시작됨");
+               주문.setstatus("배달시작됨");
                주문Repository.save(주문);
             });
 
